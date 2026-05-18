@@ -12,7 +12,7 @@ class Profil extends CI_Controller {
         $this->load->helper('text');
         $this->load->database();
         $this->load->model('Database_Model');
-        $this->load->model('Admin_Model');
+        $this->load->model('User_Model');
         $this->load->model('Api_model');
         $this->load->library('Http');
 

@@ -27,32 +27,20 @@ class Home extends CI_Controller {
                 $this->load->helper('text');
                 $this->load->database(); //Sayfada database'ye erişimi sağlar
 				$this->load->model('Database_Model');
-                $this->load->model('User_Model');
+                $this->load->model('Admin_Model');
                 $this->load->model('Api_model');
                 $this->load->library('Http');
-                if (!$this->session->userdata("oturum_data")){
+                if (!$this->session->userdata("oturum_admin")){
 				redirect(base_url().'Login');}
 				
         }
 	public function index()
 {
     // Session'dan cari referans numarasını alıyoruz
-    $oturum = $this->session->userdata('oturum_data');
-    $cariRef = $oturum['ref'];
+    $oturum = $this->session->userdata('oturum_admin');
+    
 
-    // DOĞRU KULLANIM: Model içindeki fonksiyonu ismen çağırıyoruz
-    // Api_model içinde 'get_irsaliye_count' fonksiyonu olduğunu varsayıyorum
-    $data['toplam_irsaliye'] = $this->Api_model->get_irsaliye_count($cariRef);
-
-    // Eğer tüm listeyi de çekmek istersen:
-    // $data['irsaliye_verileri'] = $this->Api_model->get_acik_irsaliyeler($cariRef);
-
-    $data['toplam_siparis'] = $this->Api_model->get_siparis_count($cariRef);
-
-    // Risk verisi (Doğrudan API'den gelen array)
-    $data['risk_verisi'] = $this->Api_model->get_cari_risk($cariRef);
-
-    $this->load->view('_main_content', $data);
+    $this->load->view('admin/_main_content');
 }    
 
 }

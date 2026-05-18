@@ -1,5 +1,5 @@
 <?php
-class Admin_Model extends CI_Model {
+class User_Model extends CI_Model {
 
         public function __construct()
         {
@@ -12,7 +12,7 @@ class Admin_Model extends CI_Model {
 	public function login($user_id,$password)
 	{
 		$this->db->select('*');
-        $this->db->from('admin');
+        $this->db->from('user');
         $this->db->where('user_id',$user_id);
         $this->db->where('password',$password);
         $this->db->limit(1);
