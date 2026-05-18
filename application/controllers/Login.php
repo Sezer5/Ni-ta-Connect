@@ -87,6 +87,7 @@ class Login extends CI_Controller {
             'email'        => $user[0]->email,
             'name'         => $user[0]->name,
             'status'       => $user[0]->status,
+            'profile_image'       => $user[0]->profile_image,
             'access_token' => $token // API'den gelen token buraya ekleniyor
         );
 

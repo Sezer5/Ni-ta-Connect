@@ -1,3 +1,4 @@
+
 <div class="topbar">
     <div class="topbar-left d-flex align-items-center">
         <img src="<?php echo base_url("uploads/logoA4.jpg"); ?>" alt="Logo" style="height: 35px;">
@@ -7,9 +8,18 @@
     <div class="topbar-right d-flex align-items-center">
         <div class="dropdown">
             <div class="user-pill dropdown-toggle shadow-sm" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://ui-avatars.com/api/?name=<?= urlencode($this->session->oturum_data['name']); ?>&background=004085&color=fff" class="rounded-circle" width="32" height="32">
+                <?php 
+                    // Standart userdata metoduyla session verisini çekiyoruz
+                    $oturum_data = $this->session->userdata('oturum_data');
+                    
+                    // Eğer veritabanında görsel adı varsa ve klasörde mevcutsa onu bas, yoksa ui-avatars üret
+                    $avatar_url = (!empty($oturum_data['profile_image']) && file_exists('./uploads/'.$oturum_data['profile_image'])) 
+                        ? base_url('uploads/'.$oturum_data['profile_image']) 
+                        : "https://ui-avatars.com/api/?name=".urlencode($oturum_data['name'])."&background=004085&color=fff&size=128";
+                ?>
+                <img src="<?= $avatar_url ?>" class="rounded-circle" width="32" height="32" style="object-fit: cover;">
                 <span class="user-pill-name">
-                    <?=$this->session->oturum_data['name'];?>
+                    <?= !empty($oturum_data['name']) ? $oturum_data['name'] : 'Kullanıcı'; ?>
                 </span>
                 <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.7rem; color: #94a3b8;"></i>
             </div>
