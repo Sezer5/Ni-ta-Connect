@@ -24,9 +24,9 @@
                 <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.7rem; color: #94a3b8;"></i>
             </div>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" style="border-radius: 15px;">
-                <li><a class="dropdown-item py-2" href="<?=base_url()?>Profil"><i class="fa-regular fa-circle-user me-2"></i> Profilim</a></li>
+                <li><a class="dropdown-item py-2" href="<?=base_url()?>admin/Profil"><i class="fa-regular fa-circle-user me-2"></i> Profilim</a></li>
                 <li><hr class="dropdown-divider opacity-50"></li>
-                <li><a class="dropdown-item py-2 text-danger" href="<?=base_url()?>Login/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Güvenli Çıkış</a></li>
+                <li><a class="dropdown-item py-2 text-danger" href="<?=base_url()?>admin/Login/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Güvenli Çıkış</a></li>
             </ul>
         </div>
     </div>

@@ -26,6 +26,7 @@ class Login extends CI_Controller {
                 $this->load->library('form_validation');
                 $this->load->model("Admin_Model");
                 $this->load->model("Database_Model");
+                $this->load->model("Admin_Permission_Model");
                 $this->load->database();
                
                 
@@ -58,6 +59,7 @@ class Login extends CI_Controller {
             'email'        => $user[0]->email,
             'name'         => $user[0]->name,
             'status'       => $user[0]->status,
+            'programmer'       => $user[0]->programmer,
             'profile_image'       => $user[0]->profile_image,
         );
 

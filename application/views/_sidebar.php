@@ -69,8 +69,9 @@
             </div>
             </nav>
     </div>
-
+    
     <div class="mt-auto p-4">
+        <a href="<?=base_url()?>Messages" class="nav-link text-success m-0"><i class="fa-solid fa-envelope me-3"></i> İletişim</a>
         <a href="<?=base_url()?>Login/logout" class="nav-link text-danger m-0"><i class="fa-solid fa-power-off me-3"></i> Çıkış</a>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 #[AllowDynamicProperties]
-class Home extends CI_Controller {
+class Roles extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -32,16 +32,32 @@ class Home extends CI_Controller {
                 $this->load->model('Api_model');
                 $this->load->library('Http');
                 if (!$this->session->userdata("oturum_admin")){
-				redirect(base_url().'Login');}
+				redirect(base_url().'Admin');}
+                if($this->Admin_Permission_Model->adminGeneralPermission($this->session->oturum_admin['id'],1) != 1){
+				redirect(base_url().'admin/Login');}
 				
         }
 	public function index()
 {
-    // Session'dan cari referans numarasını alıyoruz
-    $oturum = $this->session->userdata('oturum_admin');
+   
+	$sorgu=$this->db->query("SELECT * FROM roles");
+    $data["roles"]=$sorgu->result();
     
+    $this->load->view('admin/roles',$data);
+}
 
-    $this->load->view('admin/_main_content');
-}    
+public function role_add(){
+        $data=array(
+        'name'=>$this->input->post('name'),
+        'description'=>$this->input->post('description'),
+        );
+        $this->Database_Model->insert_data("roles",$data);
+            redirect(base_url()."admin/roles");
+}
+
+public function role_delete($id){
+		$this->db->query("DELETE FROM roles WHERE Id=$id");
+        redirect(base_url()."admin/roles");
+    }
 
 }
