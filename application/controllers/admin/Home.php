@@ -37,6 +37,23 @@ class Home extends CI_Controller {
         }
 	public function index()
 {
+	$sql = "SELECT COUNT(*) as toplam FROM messages 
+        WHERE status = 1 
+        AND (
+            is_read = 0 
+            OR admin_id = 0 
+            OR admin_id IS NULL 
+            OR TRIM(admin_id) = ''
+            OR admin_id NOT IN (SELECT Id FROM admin)
+        )";
+
+$query = $this->db->query($sql);
+$result = $query->row();
+
+// Çıkan sonucu session'a yazıyoruz
+$count = ($result) ? (int)$result->toplam : 0;
+$this->session->set_userdata('unread_messages_count', $count);
+	
     // Session'dan cari referans numarasını alıyoruz
     $oturum = $this->session->userdata('oturum_admin');
     
