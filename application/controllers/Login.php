@@ -116,6 +116,64 @@ class Login extends CI_Controller {
         
         
     }
+
+    public function uye_ol()
+	{
+        
+		$this->load->view('uye_formu');
+        
+	}
+
+    public function basvuru_kaydet() {
+    // 1. GÜVENLİK: Sayfa dışarıdan POST yerine düz linkle (GET) çağrılmaya çalışılırsa login'e postala
+    if ($this->input->method(TRUE) !== 'POST') {
+        redirect('Login');
+        return;
+    }
+
+    // 2. GÜVENLİK VE VERİ ALMA: XSS temizliği yaparak form verilerini çekiyoruz
+    $name      = $this->input->post('name', TRUE);
+    $person    = $this->input->post('person', TRUE);
+    $taxnumber = $this->input->post('taxnumber', TRUE);
+    $tel       = $this->input->post('tel', TRUE);
+    $address   = $this->input->post('address', TRUE);
+
+    // 3. DOĞRULAMA: Alanların boş gelip gelmediğini kontrol edelim (HTML bypass edilirse diye)
+    if (empty($name) || empty($person) || empty($taxnumber) || empty($tel) || empty($address)) {
+        $this->session->set_flashdata('basvuru_durum', 'hata');
+        $this->session->set_flashdata('basvuru_sonuc', 'Lütfen formdaki tüm alanları eksiksiz doldurun.');
+        redirect('Login/uye_ol');
+        return;
+    }
+
+    // 4. VERİTABANI EŞLEŞTİRME: account_request tablonun kolon yapısı
+    $data = array(
+        'name'       => $name,
+        'person'     => $person,
+        'taxnumber'  => $taxnumber,
+        'tel'        => $tel,
+        'address'    => $address,
+        'status'     => 0,                  // 0: Beklemede (Admin panelinden onaylanacak)
+        'is_read'    => 0,                  // 0: Okunmadı (Yeni bildirim uyarısı için)
+        'admin_id'   => NULL,               // İlk aşamada boş
+        'created_at' => date('Y-m-d H:i:s') // Başvuru tarihi
+    );
+
+    // 5. KAYIT İŞLEMİ: Tablo adı 'account_request' olarak set edildi
+    $kaydet = $this->db->insert('account_request', $data);
+
+    // 6. KULLANICIYI BİLGİLENDİRME VE YÖNLENDİRME
+    if ($kaydet) {
+        $this->session->set_flashdata('basvuru_durum', 'basarili');
+        $this->session->set_flashdata('basvuru_sonuc', 'Başvurunuz başarıyla alındı! İnceleme sonrasında sizinle iletişime geçeceğiz.');
+    } else {
+        $this->session->set_flashdata('basvuru_durum', 'hata');
+        $this->session->set_flashdata('basvuru_sonuc', 'Sistemsel bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+    }
+
+    // Form sayfasına güvenle geri gönderiyoruz
+    redirect('Login/uye_ol');
+}
         
 }
     

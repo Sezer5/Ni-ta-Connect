@@ -25,5 +25,27 @@ class Admin_Model extends CI_Model {
 		
 		
 	}
+
+    // 1. Sol menüdeki okunmamış başvuru sayısını getirir
+    public function get_unread_request_count() {
+        return $this->db->where('is_read', 0)->count_all_results('account_request');
+    }
+
+    // 2. Tüm başvuruları listeler
+    public function get_all_requests() {
+        return $this->db->order_by('created_at', 'DESC')->get('account_request')->result_array();
+    }
+
+    // 3. Tek bir başvurunun detayını getirir
+    public function get_request_detail($id) {
+        return $this->db->where('id', $id)->get('account_request')->row_array();
+    }
+
+        // AccountRequest_Model içine eklenebilir
+    public function get_pending_request_count() {
+        $this->db->where('admin_id IS NULL');
+        $this->db->from('account_request');
+        return $this->db->count_all_results();
+    }
     
 }

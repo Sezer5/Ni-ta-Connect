@@ -53,7 +53,9 @@ $result = $query->row();
 // Çıkan sonucu session'a yazıyoruz
 $count = ($result) ? (int)$result->toplam : 0;
 $this->session->set_userdata('unread_messages_count', $count);
-	
+	// Admin Controller veya ilgili ana Controller içerisindeki constructor veya login sonrası:
+$count = $this->Admin_Model->get_pending_request_count();
+$this->session->set_userdata('pending_requests_count', $count);
     // Session'dan cari referans numarasını alıyoruz
     $oturum = $this->session->userdata('oturum_admin');
     

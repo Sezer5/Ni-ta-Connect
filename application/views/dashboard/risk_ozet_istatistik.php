@@ -5,7 +5,7 @@
     $oran = ($risk_limiti > 0) ? round(($bakiye / $risk_limiti) * 100) : 0;
 ?>
 
-<div class="row mt-4">
+<div class="row mt-4" onclick="window.location.href='<?= base_url('Risk') ?>';" style="cursor: pointer;">
     <!-- Grafik Alanı -->
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm rounded-4 p-4 h-100">

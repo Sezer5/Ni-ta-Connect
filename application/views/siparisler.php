@@ -21,15 +21,17 @@
                 <tbody>
                     <?php if(!empty($siparis_verileri)): ?>
                         <?php foreach($siparis_verileri as $satir): ?>
-                            <tr>
-                                <td><?= date('d.m.Y', strtotime($satir['Tarih'])) ?></td>
-                                <td><?= $satir['SIPARIS_NO'] ?></td>
-                                <td><?= $satir['MAMUL'] ?></td>
-                                <td><?= $satir['VADE'] ?></td>
-                                <td><?= $satir['TONAJ'] ?></td>
-                                <td><?= number_format($satir['TON_FIYAT'], 2, ',', '.') ?> ₺</td>
-                                <td><?= number_format($satir['TOPLAM'], 2, ',', '.') ?> ₺</td>
-                            </tr>
+                            <?php if($satir['MAMUL'] != 'PALET' && $satir['MAMUL'] != 'NAKLİYE HİZMETİ'){ ?>
+                                <tr>
+                                    <td><?= date('d.m.Y', strtotime($satir['Tarih'])) ?></td>
+                                    <td><?= $satir['SIPARIS_NO'] ?></td>
+                                    <td><?= $satir['MAMUL'] ?></td>
+                                    <td><?= $satir['VADE'] ?></td>
+                                    <td><?= $satir['TONAJ'] ?></td>
+                                    <td><?= number_format($satir['TON_FIYAT'], 2, ',', '.') ?> ₺</td>
+                                    <td><?= number_format($satir['TOPLAM'], 2, ',', '.') ?> ₺</td>
+                                </tr>
+                            <?php }?>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </tbody>

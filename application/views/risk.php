@@ -16,7 +16,7 @@
     <div class="container-fluid">
         
         <div class="d-flex align-items-center mb-4">
-            <h2 class="pirulen mb-0" style="color: #1a237e; font-size: 1.4rem;">FİNANSAL RİSK ANALİZİ</h2>
+            <h2 class="pirulen mb-0" style="color: #1a237e; font-size: 1.4rem;">FİNANSAL DURUM ANALİZİ</h2>
             <div class="ms-auto">
                 <span class="badge bg-white text-muted shadow-sm p-2 border">
                     <i class="fa-solid fa-calendar-check me-1 text-primary"></i> <?= date('d.m.Y H:i') ?>

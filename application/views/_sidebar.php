@@ -58,11 +58,11 @@
                 <div class="d-flex flex-column gap-1 ps-3 mt-1 border-start ms-3" style="border-color: rgba(0, 64, 133, 0.2) !important;">
                     
                     <a class="nav-link py-2 <?= ($active_menu == 'Risk') ? 'active' : '' ?>" href="<?=base_url()?>Risk" style="font-size: 0.85rem;">
-                        <i class="fa-solid fa-area-chart me-2" style="font-size: 0.8rem;"></i> Risk Analizi
+                        <i class="fa-solid fa-area-chart me-2" style="font-size: 0.8rem;"></i> Finansal Durum
                     </a>
                     
                     <a class="nav-link py-2 <?= ($active_menu == 'Ekstreler') ? 'active' : '' ?>" href="<?=base_url()?>Ekstreler" style="font-size: 0.85rem;">
-                        <i class="fa-solid fa-book me-2" style="font-size: 0.8rem;"></i> Ekstreler
+                        <i class="fa-solid fa-book me-2" style="font-size: 0.8rem;"></i> Cari Durum
                     </a>
                     
                 </div>

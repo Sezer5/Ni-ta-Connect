@@ -82,7 +82,7 @@
                     <?php endif; ?>
                     
                 </div>
-                <form action="<?=base_url()?>admin/Login/login_ol" method="post">
+                <?php echo form_open('admin/Login/login_ol'); ?>
                     <div class="mb-3">
                         <label class="form-label text-dark fw-semibold small">Kullanıcı Adı</label>
                         <div class="input-group">

@@ -76,6 +76,27 @@
         background: linear-gradient(135deg, #059669 0%, #047857 100%);
     }
 
+    /* 🎯 Yeni Eklenen Geçmiş Talepler Butonu Stili */
+    .btn-history-custom {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: #475569;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-size: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-history-custom:hover {
+        transform: translateY(-2px);
+        background-color: #f8fafc;
+        color: #1a237e;
+        border-color: #cbd5e1;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
     /* Bilgi Listesi İkonları */
     .info-icon-box {
         width: 36px;
@@ -92,14 +113,20 @@
 <div class="main-content">
     <div class="container-fluid py-4">
         
-        <div class="d-flex align-items-center gap-3 mb-4">
-            <div class="p-2 bg-white shadow-sm rounded-3" style="border: 1px solid #e2e8f0;">
-                <i class="fa-solid fa-paper-plane text-primary fs-4 px-1"></i>
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="p-2 bg-white shadow-sm rounded-3" style="border: 1px solid #e2e8f0;">
+                    <i class="fa-solid fa-paper-plane text-primary fs-4 px-1"></i>
+                </div>
+                <div>
+                    <h2 class="pirulen m-0" style="color: #1a237e; font-size: 1.2rem;">İLETİŞİM DESTEK TALEBİ</h2>
+                    <p class="text-muted small m-0 mt-1">Görüş, öneri ya da teknik destek taleplerinizi doğrudan ilgili birime iletebilirsiniz.</p>
+                </div>
             </div>
-            <div>
-                <h2 class="pirulen m-0" style="color: #1a237e; font-size: 1.2rem;">İLETİŞİM DESTEK TALEBİ</h2>
-                <p class="text-muted small m-0 mt-1">Görüş, öneri ya da teknik destek taleplerinizi doğrudan ilgili birime iletebilirsiniz.</p>
-            </div>
+            
+            <a href="<?= base_url('messages/history') ?>" class="btn btn-history-custom pirulen d-flex align-items-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left fs-6"></i> ESKİ İLETİŞİM TALEPLERİ
+            </a>
         </div>
         
         <?php if($this->session->userdata('success')): ?>
@@ -156,7 +183,7 @@
                     </div>
 
                     <div class="border-top pt-3 border-white-10">
-                        <small class="text-white-50">Güvenli alt yapı vasıtasıyla iletilmektedir.</small>
+                        <small class="text-white-50">Güvenli alt yapı vasıtasıyla iletelmektedir.</small>
                     </div>
                 </div>
             </div>
@@ -207,7 +234,6 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script>
 $(document).ready(function() {
-    // Profil resmi input takip scripti (Bu sayfada aktif bir element varsa kullanılabilir)
     $('#profileImageInput').change(function() {
         const file = this.files[0];
         if (file) {
@@ -224,7 +250,6 @@ $(document).ready(function() {
         }
     });
 
-    // Başarı/Hata mesajlarının 5 saniye sonra otomatik kapanmasını sağlar
     setTimeout(function() {
         $(".alert").alert('close');
     }, 5000);

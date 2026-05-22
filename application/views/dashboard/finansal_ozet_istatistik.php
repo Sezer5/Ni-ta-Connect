@@ -1,4 +1,4 @@
-<div class="col-lg-4">
+<div class="col-lg-4" onclick="window.location.href='<?= base_url('Risk') ?>';" style="cursor: pointer;">
     <div class="card border-0 shadow-sm rounded-4 h-100 bg-white">
         <div class="card-body p-4 d-flex flex-column justify-content-center">
             <!-- Güncel Bakiye Satırı -->

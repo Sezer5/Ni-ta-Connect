@@ -49,6 +49,25 @@
                     <i class="fa-solid fa-users me-3"></i> Admin Rolleri
                 </a>
             <?php } ?>
+
+            <?php if($this->Admin_Permission_Model->adminGeneralPermission($this->session->oturum_admin['id'], 4) == 1){ ?>
+                <a class="nav-link d-flex justify-content-between align-items-center <?= ($current_uri == 'admin/AccountRequest/uyelik_istekleri') ? 'active' : '' ?>" href="<?=base_url()?>admin/AccountRequest/uyelik_istekleri">
+                    <span>
+                        <i class="fa-solid fa-user-plus me-3"></i> Üyelik İstekleri
+                    </span>
+                    
+                    <?php 
+                        // Session'dan sayıyı çek
+                        $pending_count = $this->session->userdata('pending_requests_count');
+                        if(!empty($pending_count) && $pending_count > 0): 
+                    ?>
+                        <span class="badge rounded-pill bg-warning text-dark border border-white px-2 py-1 shadow-sm" 
+                            style="font-size: 0.65rem; font-family: sans-serif; font-weight: 800; min-width: 20px;">
+                            <?= $pending_count ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
+            <?php } ?>
             
             <hr class="my-2" style="opacity: 0.1; color: var(--nigtas-blue);">
 

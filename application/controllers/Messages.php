@@ -96,4 +96,31 @@ class Messages extends CI_Controller {
         redirect($this->input->server('HTTP_REFERER'), 'refresh');
     }
 
+    public function history()
+    {
+        // 1. Oturum kontrolü: Eğer kullanıcının session kodu yoksa giriş sayfasına yönlendir
+        $user_code = $this->session->oturum_data['code'];
+        if (empty($user_code)) {
+            redirect('Login'); // Giriş kontrolü yaptığınız controller adını yazın
+        }
+
+        // 2. Veritabanından sadece bu kullanıcı koduna ait mesajları ilişkileriyle çekiyoruz
+        $this->db->select('
+            messages.*, 
+            message_topics.name AS topic_name, 
+            admin.name AS admin_name
+        ');
+        $this->db->from('messages');
+        $this->db->join('message_topics', 'message_topics.Id = messages.topic', 'inner');
+        $this->db->join('admin', 'admin.Id = messages.admin_id', 'left'); // İlgilenen admin varsa adını almak için
+        $this->db->where('messages.code', $user_code);
+        $this->db->order_by('messages.created_at', 'DESC'); // En yeni mesaj en üstte görünecek şekilde
+        
+        $data['history_messages'] = $this->db->get()->result();
+        $data['title'] = "Eski İletişim Taleplerim";
+
+        // 3. Görünüm dosyasını yüklüyoruz
+        $this->load->view('messages_history', $data);
+    }
+
 }
