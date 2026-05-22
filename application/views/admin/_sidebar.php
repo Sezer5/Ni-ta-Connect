@@ -82,7 +82,7 @@
                    aria-expanded="<?= $is_admin_active ? 'true' : 'false' ?>" 
                    aria-controls="adminMenu">
                     <span>
-                        <i class="fa-solid fa-user-gear me-3"></i> Admin İşlemler
+                        <i class="fa-solid fa-user-gear me-3"></i> Admin İşlemleri
                     </span>
                     <i class="fa-solid fa-chevron-down submenu-arrow transition-all" style="font-size: 0.8rem;"></i>
                 </a>
