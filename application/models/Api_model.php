@@ -55,4 +55,8 @@ class Api_model extends CI_Model {
     // Controller'daki URL yapısına uygun olarak 'risk/GetCariRisk' kullanıyoruz
     return $this->call_api('risk/GetCariRisk', ['cariRef' => $cariRef]);
     }
+
+    public function get_cari_vade($cariRef) {
+        return $this->call_api('vade/GetCariVade', ['cariRef' => $cariRef]);
+    }
 }

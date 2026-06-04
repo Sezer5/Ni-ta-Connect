@@ -52,7 +52,18 @@ class Home extends CI_Controller {
     // Risk verisi (Doğrudan API'den gelen array)
     $data['risk_verisi'] = $this->Api_model->get_cari_risk($cariRef);
 
-    $this->load->view('_main_content', $data);
+    // Vade verilerini çek
+    $vade_raw = $this->Api_model->get_cari_vade($cariRef);
+
+    // Veri yapısını düzelt (Eğer dizi içindeyse 0. indeksi al, değilse direkt al)
+    $vade_data = isset($vade_raw[0]) ? $vade_raw[0] : $vade_raw;
+
+    // View için temiz değişkenler
+    $data['tanimli_vade'] = $vade_data['TANIMLI_VADE'] ?? 0;
+    $data['gerceklesen_vade'] = $vade_data['GERCEKLESEN_VADE'] ?? 0;
+    
+    $this->load->vars($data); // Tüm $data içeriğini tüm view'lar için erişilebilir yap
+    $this->load->view('_main_content'); // View'ı yükle
 }    
 
 }

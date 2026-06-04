@@ -9,7 +9,7 @@
     <!-- Grafik Alanı -->
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-            <h6 class="pirulen mb-4" style="font-size: 10px; color: #666;">BAKİYE & RİSK KARŞILAŞTIRMASI</h6>
+            <h6 class="pirulen mb-4" style="font-size: 10px; color: #666;">BAKİYE & LİMİT KARŞILAŞTIRMASI</h6>
             <div class="position-relative" style="height: 300px;">
                 <canvas id="mainRiskChart"></canvas>
                 <div class="position-absolute top-50 start-50 translate-middle text-center">

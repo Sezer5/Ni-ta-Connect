@@ -41,44 +41,48 @@
                 </div>
             </div>
             
-            <!-- 2. RİSK LİMİTİ (Risk API'den) -->
+            <!-- 2. TANIMLI VADE -->
             <div class="col-md-4">
-                <div class="card risk-card shadow-sm p-4 bg-white border-start border-danger border-5">
+                <div class="card risk-card shadow-sm p-4 bg-white border-start border-success border-5">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="icon-box bg-danger-light p-2 rounded-3 me-3">
-                            <i class="fa-solid fa-shield-halved text-danger fs-4"></i>
+                        <div class="icon-box bg-success-light p-2 rounded-3 me-3">
+                            <i class="fa-solid fa-clock text-success fs-4"></i>
                         </div>
-                        <small class="text-muted pirulen" style="font-size: 9px;">RİSK LİMİTİ</small>
+                        <small class="text-muted pirulen" style="font-size: 9px;">TANIMLI VADE</small>
                     </div>
-                    <h2 class="money-val mb-0 text-danger">
-                        <?= number_format($risk_verisi['RISK'] ?? 0, 2, ',', '.') ?>
-                        <span class="fs-6 fw-normal">TL</span>
+                    <h2 class="money-val mb-0 text-success">
+                        <?php 
+                            // Güvenli kontrol: vade_verisi dizisi içinde TANIMLI_VADE anahtarı var mı?
+                            $vade_goster = isset($vade_verisi['TANIMLI_VADE']) ? $vade_verisi['TANIMLI_VADE'] : 0;
+                        ?>
+                        <?= is_numeric($vade_goster) ? number_format($vade_goster, 0) : $vade_goster ?>
+                        
                     </h2>
                 </div>
             </div>
 
-            <!-- 3. KALAN LİMİT (Kalan Limit API'den) -->
-            <div class="col-md-4">
-                <?php 
-                    // image_56e9f8.png'den gelen net rakam
-                    $kalan_limit_net = (float)($kalan_limit_api ?? 0);
-                    // Oran gösterimi için mecburi bakiye/limit hesabı (sadece görsel progress bar için)
-                    $oran = ($risk_verisi['RISK'] > 0) ? round(($risk_verisi['BAKIYE'] / $risk_verisi['RISK']) * 100) : 0;
-                ?>
-                <div class="card risk-card shadow-sm p-4 bg-white">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <small class="text-muted pirulen" style="font-size: 9px;">KALAN LİMİT</small>
-                        <span class="badge bg-light text-dark fw-bold">%<?= $oran ?> Doluluk</span>
-                    </div>
-                    <h2 class="money-val mb-0 text-success">
-                        <?= number_format($kalan_limit_net, 2, ',', '.') ?>
-                        <span class="fs-6 fw-normal">TL</span>
-                    </h2>
-                    <div class="progress mt-3">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: <?= 100 - $oran ?>%"></div>
+            <!-- 3. GERÇEKLEŞEN VADE -->
+                <div class="col-md-4">
+                    <div class="card risk-card shadow-sm p-4 bg-white border-start border-primary border-5">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="icon-box bg-primary-light p-2 rounded-3 me-3">
+                                <i class="fa-solid fa-clock text-primary fs-4"></i>
+                            </div>
+                            <small class="text-muted pirulen" style="font-size: 9px;">GERÇEKLEŞEN VADE</small>
+                        </div>
+                        <h2 class="money-val mb-0 text-primary">
+                            <?php 
+                                // Güvenli kontrol: vade_verisi dizisi içinde GERCEKLESEN_VADE anahtarı var mı?
+                                $vade_goster = isset($vade_verisi['GERCEKLESEN_VADE']) ? $vade_verisi['GERCEKLESEN_VADE'] : 0;
+                            ?>
+                            
+                            <h2 class="money-val mb-0 text-primary">
+                                <?= is_numeric($vade_goster) ? number_format($vade_goster, 0) : $vade_goster ?>
+                                GÜN
+                            </h2>
+                        </h2>
                     </div>
                 </div>
-            </div>
         </div>
 
         <div class="row">
